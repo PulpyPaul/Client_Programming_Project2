@@ -1,0 +1,32 @@
+<!-- Replace the value of the key parameter with your own API key. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+    <script src="jquery-ui.min.js" type="text/javascript"></script>
+    <script src="project2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <img src="img/iste_logo2.png" alt="ISTE Logo" id="iste_Logo">
+    <div id="aboutContent">
+      <div class="container">
+        <p id="aboutTitle"></p>
+        <p id="aboutDescription"></p>
+      </div>
+    </div>
+    <div id="accordionMajors">
+        <h3>1</h3>
+        <div>text</div>
+        <h3>2</h3>
+        <div>text</div>
+    </div>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWfXOOj2CJvFz1BWO3MZ2FcTS-L6YgKRM&callback=initMap"
+    async defer></script>
+    </body>
+</html>
