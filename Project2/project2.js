@@ -7,7 +7,6 @@ var map;
 function init() {
   initMap();
   createMarkers();
-  createMajor();
 }
 
 function initMap() {
@@ -20,37 +19,56 @@ function initMap() {
 
 $(document).ready(function(){
 
-  $("#accordionMajors").accordion({
-    collapsible: true,
-    active: false,
-    heightStyle: "content"
-  });
-
   myXhr('get',{path:'/location'},'#about').done(function(json){
       locationData = json;
   });
 
   myXhr('get', {path:'/degrees'}, '#about').done(function(json){
     degreeData = json;
+    for (var i = 0; i < degreeData.undergraduate.length; i++) {
+      $('#UNDdegrees').append('<div class="degree"><h2>' +degreeData.undergraduate[i].title+ '</h2><p>' +degreeData.undergraduate[i].description+ '</p></div>');
+    }
+
+    for (var i = 0; i < degreeData.graduate.length - 1; i++) {
+      $('#GRDdegrees').append('<div class="degree"><h2>' +degreeData.graduate[i].title+ '</h2><p>' +degreeData.graduate[i].description+ '</p></div>');
+    }
   });
 
   myXhr('get', {path:'/minors'}, '#about').done(function(json){
     minorData = json;
+    for (var i = 0; i < minorData.UgMinors.length; i++) {
+      $(accordionMinors).append("<h3>" +minorData.UgMinors[i].title+ "</h3>");
+
+      var divContent = "<div>Description<br><br> " +minorData.UgMinors[i].description+ "<br><br>Courses<br><br>";
+      
+      for (var j = 0; j < minorData.UgMinors[i].courses.length; j++) {
+        divContent += (minorData.UgMinors[i].courses[j]+ "<br>"); 
+      }
+
+      divContent += "</div>";
+    
+      $(accordionMinors).append(divContent);
+    }
+
+    $("#accordionMinors").accordion({
+      collapsible: true,
+      active: false,
+      heightStyle: "content"
+    });
   });
 
   myXhr('get', {path:'/about'}, '#about').done(function(json){
     aboutData = json;
-    $('#aboutTitle').html("<p>" +aboutData.title+ "</p>");
+    $('#aboutTitle').html("<h1>" +aboutData.title+ "</h1>");
     $('#aboutDescription').html("<p>" +aboutData.description+ "</p>");
-
-    console.dir(aboutData);
+    $('#aboutQuote').html('<p>"' +aboutData.quote+ '"</p>');
+    $('#aboutAuthor').html("<p>" +aboutData.quoteAuthor+ "</p>");    
   });
 
+  myXhr('get', {path:'/employment'}, null).done(function(json){
+    console.dir(json);
+  });
 });
-
-function createMajor() {
-  
-}
 
 function createMarkers() {
   for (var i = 0; i < locationData.length; i++) {

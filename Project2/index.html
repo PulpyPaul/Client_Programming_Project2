@@ -1,4 +1,3 @@
-<!-- Replace the value of the key parameter with your own API key. -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,18 +11,32 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <img src="img/iste_logo2.png" alt="ISTE Logo" id="iste_Logo">
-    <div id="aboutContent">
+    <img src="img/iste_logo3.png" alt="ISTE Logo" id="iste_Logo">
+    <div id="aboutContent" class="contentBlock">
       <div class="container">
-        <p id="aboutTitle"></p>
+        <h1 id="aboutTitle"></h1>
         <p id="aboutDescription"></p>
+        <p id="aboutQuote"></p>
+        <p id="aboutAuthor"></p>
       </div>
     </div>
-    <div id="accordionMajors">
-        <h3>1</h3>
-        <div>text</div>
-        <h3>2</h3>
-        <div>text</div>
+    <div id="undDegreeContent" class="contentBlock">
+      <div class="container degreeContainer">
+        <h1>Undergraduate Degrees</h1>
+        <div id="UNDdegrees"></div>
+      </div>
+    </div>
+    <div id="grdDegreeContent" class="contentBlock">
+      <div class="container">
+        <h1>Graduate Degrees</h1>
+        <div id="GRDdegrees"></div>
+      </div>
+    </div>
+    <div id="minorContent" class="contentBlock">
+      <div class="container">
+        <h1>Minors</h1>
+        <div id="accordionMinors"></div>
+      </div>
     </div>
     <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWfXOOj2CJvFz1BWO3MZ2FcTS-L6YgKRM&callback=initMap"

@@ -11,14 +11,14 @@ html, body {
 }
 
 body {
-    background: url(img/background.jpg);
+    background-image: url(img/background4.png);
 }
 
 #iste_Logo {
     display: block;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 50%;
 }
 
@@ -26,19 +26,74 @@ body {
     display: block;
     margin: auto;
     background-color: white;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #aboutTitle {
-    font-style: italic;
     text-align: center;
-    font-weight: normal;
-    font-size: 50px;
+}
+
+#aboutQuote {
+    font-style: italic;
+    display: block;
 }
 
 .container {
     display: block;
     margin: auto;
-    width: 60%;
+    width: 70%;
 }
 
+.contentBlock {
+    border: 3px solid rgb(232, 104, 6);
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#undDegreeContent {
+    border: none;
+    color: white;
+    padding-bottom: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+    padding: 0%;
+    margin-bottom: 20px;
+}
+
+.degree {
+    display: inline-block;
+    width: 25%;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.degree h2 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.degreeContainer {
+    text-align: center;
+}
+
+#grdDegreeContent {
+    background-color: white;
+    padding-bottom: 20px;
+}
+
+#minorContent {
+    border: none;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#minorContent h1 {
+    color: white;
+}
 
