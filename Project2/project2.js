@@ -2,6 +2,7 @@ var locationData;
 var degreeData;
 var minorData;
 var aboutData;
+var employmentData;
 var map;
 
 function init() {
@@ -12,7 +13,7 @@ function init() {
 function initMap() {
   var locOfCity = {lat: 39.8283, lng: -98.5795};
   map = new google.maps.Map(
-  document.getElementById('map'), {zoom: 3, center: locOfCity});
+  document.getElementById('map'), {zoom: 5, center: locOfCity});
 
   var marker = new google.maps.Marker({position: locOfCity, map: map})
 }
@@ -66,7 +67,65 @@ $(document).ready(function(){
   });
 
   myXhr('get', {path:'/employment'}, null).done(function(json){
-    console.dir(json);
+    employmentData = json;
+    var htmlContent = "<h2>" +employmentData.introduction.title+ "</h2>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<p>" +employmentData.introduction.content[0].description+ "</p>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<h2>" +employmentData.introduction.content[1].title+ "</h2>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<p>" +employmentData.introduction.content[1].description+ "</p>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<h2>" +employmentData.careers.title+ "</h2>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "";
+
+    for (var i = 0; i < employmentData.careers.careerNames.length; i++) {
+      htmlContent += "<p>" +employmentData.careers.careerNames[i]+ "</p>";
+    }
+
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<h2>" +employmentData.employers.title+ "</h2>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "";
+
+    for (var i = 0; i < employmentData.employers.employerNames.length; i++) {
+      htmlContent += "<p>" +employmentData.employers.employerNames[i]+ "</p>";
+    }
+
+    $('#employment').append(htmlContent);
+    
+    htmlContent = "<h2>" +employmentData.degreeStatistics.title+ "<h2>";
+    $('#employment').append(htmlContent);
+
+    htmlContent = "";
+
+    for (var i = 0; i < employmentData.degreeStatistics.statistics.length; i++) {
+      htmlContent += "<p>" +employmentData.degreeStatistics.statistics[i].value+ " - " +employmentData.degreeStatistics.statistics[i].description+ "</p>";
+    }
+
+    $('#employment').append(htmlContent);
+
+    htmlContent = "<h2>" +employmentData.employmentTable.title+ "</h2>";
+    $('#employment').append(htmlContent);
+
+    var currTable = employmentData.employmentTable.professionalEmploymentInformation;
+    
+    htmlContent = "";
+    for (var i = 0; i < employmentData.employmentTable.professionalEmploymentInformation.length; i++) {
+      htmlContent += "<tr><td>" +currTable[i].employer+ "</td><td>" +currTable[i].degree+ "</td><td>" +currTable[i].city+ "</td><td>" +currTable[i].title+ "</td><td>" +currTable[i].startDate+ "</td></tr>";
+    }
+
+    $('#employTableData').append(htmlContent);
+
+    console.dir(employmentData);
   });
 });
 

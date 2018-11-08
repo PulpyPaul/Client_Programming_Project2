@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple Map</title>
+    <title>Project 2</title>
     <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
     <script src="jquery-ui.min.js" type="text/javascript"></script>
     <script src="project2.js" type="text/javascript"></script>
+    <script src="Chart.bundle.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="jquery-ui.min.css">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="initial-scale=1.0">
@@ -27,7 +28,7 @@
       </div>
     </div>
     <div id="grdDegreeContent" class="contentBlock">
-      <div class="container">
+      <div class="container degreeContainer">
         <h1>Graduate Degrees</h1>
         <div id="GRDdegrees"></div>
       </div>
@@ -38,7 +39,30 @@
         <div id="accordionMinors"></div>
       </div>
     </div>
-    <div id="map"></div>
+    <div id="employmentContent" class="contentBlock">
+      <div class="container">
+          <h1>Employment</h1>
+          <div id="employment"></div>
+          <div class="employmentTables">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employer</th>
+                  <th>Degree</th>
+                  <th>City</th>
+                  <th>Title</th>
+                  <th>Start Date</th>
+                </tr>
+              </thead>
+              <tbody id="employTableData">
+
+              </tbody>
+            </table>
+          </div>
+          <p>Map of where students work!</p>
+          <div id="map"></div>
+      </div>
+    </div>    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWfXOOj2CJvFz1BWO3MZ2FcTS-L6YgKRM&callback=initMap"
     async defer></script>
     </body>
