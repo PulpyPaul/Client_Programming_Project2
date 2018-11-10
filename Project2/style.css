@@ -45,7 +45,7 @@ body {
 }
 
 .contentBlock {
-    border: 3px solid rgb(232, 104, 6);
+    border: 5px solid rgb(232, 104, 6);
     border-left: 0px;
     border-right: 0px;
 }
@@ -65,20 +65,9 @@ h1 {
 
 .degree {
     display: inline-block;
-    width: 25%;
-    margin-top: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
-    text-align: left;
-}
-
-.degree h2 {
-    text-align: center;
-    font-size: 20px;
-}
-
-.degreeContainer {
-    text-align: center;
+    margin: auto;
+    width: 30%;
+    height: 300px;
 }
 
 #grdDegreeContent {
@@ -103,4 +92,46 @@ h1 {
 .employmentTables {
     overflow: auto;
     height: 300px;
+}
+
+#peopleContent {
+    border: none;
+    color: white;
+    text-align: center;
+}
+
+.personBox {
+    background-color: grey;
+    display: inline-block;
+    height: 150px;
+    width: 300px;
+    margin: 20px;
+}
+
+#researchContent {
+    background-color: white;
+}
+
+#resourcesContent {
+    border: none;
+    color: white;
+}
+
+#footer {
+    color: white;
+    border-top: none;   
+}
+
+#footer a {
+    color: white;
+}
+
+#links, #copyright, #socialMedia {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#copyright {
+    text-align: center;
 }

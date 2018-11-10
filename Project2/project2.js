@@ -3,6 +3,10 @@ var degreeData;
 var minorData;
 var aboutData;
 var employmentData;
+var peopleData;
+var researchData;
+var footerData;
+var newsData;
 var map;
 
 function init() {
@@ -27,7 +31,7 @@ $(document).ready(function(){
   myXhr('get', {path:'/degrees'}, '#about').done(function(json){
     degreeData = json;
     for (var i = 0; i < degreeData.undergraduate.length; i++) {
-      $('#UNDdegrees').append('<div class="degree"><h2>' +degreeData.undergraduate[i].title+ '</h2><p>' +degreeData.undergraduate[i].description+ '</p></div>');
+      $('#UNDdegrees').append('<div class="degree"><h3>' +degreeData.undergraduate[i].title+ '</h3><p>' +degreeData.undergraduate[i].description+ '</p></div>');
     }
 
     for (var i = 0; i < degreeData.graduate.length - 1; i++) {
@@ -68,6 +72,7 @@ $(document).ready(function(){
 
   myXhr('get', {path:'/employment'}, null).done(function(json){
     employmentData = json;
+
     var htmlContent = "<h2>" +employmentData.introduction.title+ "</h2>";
     $('#employment').append(htmlContent);
 
@@ -113,21 +118,122 @@ $(document).ready(function(){
 
     $('#employment').append(htmlContent);
 
-    htmlContent = "<h2>" +employmentData.employmentTable.title+ "</h2>";
-    $('#employment').append(htmlContent);
-
     var currTable = employmentData.employmentTable.professionalEmploymentInformation;
     
     htmlContent = "";
-    for (var i = 0; i < employmentData.employmentTable.professionalEmploymentInformation.length; i++) {
+    for (var i = 0; i < currTable.length; i++) {
       htmlContent += "<tr><td>" +currTable[i].employer+ "</td><td>" +currTable[i].degree+ "</td><td>" +currTable[i].city+ "</td><td>" +currTable[i].title+ "</td><td>" +currTable[i].startDate+ "</td></tr>";
     }
-
     $('#employTableData').append(htmlContent);
 
-    console.dir(employmentData);
+    var currTable = employmentData.coopTable.coopInformation;
+
+    htmlContent = "";
+    for (var i = 0; i < currTable.length; i++) {
+      htmlContent += "<tr><td>" +currTable[i].employer+ "</td><td>" +currTable[i].degree+ "</td><td>" +currTable[i].city+ "</td><td>" +currTable[i].term+ "</td><tr>";
+    }
+
+    $('#coopTableData').append(htmlContent);
+   });
+
+   myXhr('get', {path:'/people'}, null).done(function(json){
+      peopleData = json;
+
+      $('#peopleContainer').append("<h1>" +peopleData.title+ "</h1>");
+      $('#peopleContainer').append("<h3>" +peopleData.subTitle+ "<h3>");
+
+      for (var i = 0; i < peopleData.faculty.length; i++) {
+        var personBox = '<div class="personBox"><h2>' +peopleData.faculty[i].name+ '</h2><p>' +peopleData.faculty[i].title+ '</p></div>';
+        $('#peopleContainer').append(personBox);
+      }
+
+      for (var i = 0; i < peopleData.staff.length; i++) {
+        var personBox = '<div class="personBox"><h2>' +peopleData.staff[i].name+ '</h2><p>' +peopleData.staff[i].title+ '</p></div>';
+        $('#peopleContainer').append(personBox);
+      }
+
+      $('#modalPopup').dialog({
+        modal: true,
+        autoOpen: false
+      });
+
+      $('.personBox').each(function(i) {
+        this.onclick = function() { openPersonModal(i) };
+      });
+   });
+
+   myXhr('get', {path:'/research'}, null).done(function(json){
+      researchData = json;
+      
+      htmlContent = "<ul>";
+
+      for (var i = 0; i < researchData.byInterestArea.length; i++) {
+        htmlContent += '<li><a href="#fragment'+i+'">'+researchData.byInterestArea[i].areaName+'</a></li>';
+      }
+    
+      htmlContent += "</ul>";
+
+      $('#researchTabs').append(htmlContent);
+
+      htmlContent = "";
+
+      for (var i = 0; i < researchData.byInterestArea.length; i++) {
+        htmlContent += '<div id="fragment'+i+'">';
+
+        var currArea = researchData.byInterestArea[i].citations;
+
+        for (var j = 0; j < currArea.length; j++) {
+          htmlContent += '<br>' +currArea[j]+ '<br>';
+        }
+
+        htmlContent += '</div>';
+      }
+
+      $('#researchTabs').append(htmlContent);
+      
+
+      $('#researchTabs').tabs({
+        active: 0,
+        collapsible: true
+      });
+  });
+
+  myXhr('get', {path:'/footer'}, null).done(function(json){
+    footerData = json;
+
+    for (var i = 0; i < footerData.quickLinks.length; i++) {
+      $('#links').append('<p><a href="'+footerData.quickLinks[i].href+'">'+footerData.quickLinks[i].title+'</a></p>');
+    }
+
+    $('#copyright').append("<h3>Copyright</h3>" +footerData.copyright.html);
+
+    $('#socialMedia').append('<p><a href="'+footerData.social.facebook+'">Facebook</a></p>');
+    $('#socialMedia').append('<p><a href="'+footerData.social.twitter+'">Twitter</a></p>');
+  });
+
+  myXhr('get', {path:'/news'}, null).done(function(json){
+    console.dir(json);
   });
 });
+
+function openPersonModal(personDataIndex) {
+
+  var personData;
+
+  if (personDataIndex > 33) {
+    personData = peopleData.staff[personDataIndex - 34];
+  } else {
+    personData = peopleData.faculty[personDataIndex];
+  }
+ 
+  $('#modalPopup').empty();
+  $('#modalPopup').dialog({
+    title: personData.name
+  });
+  $('#modalPopup').append('<img src="' +personData.imagePath+ '"></img>');
+  $('#modalPopup').append('<p>Title: '+personData.title+ '</p><p>Email: ' +personData.email+ '</p><p>Office: ' +personData.office+ '</p><p>Phone: ' +personData.phone+ '</p><p>Username: ' +personData.username+ '</p>');
+  $('#modalPopup').dialog("open");
+}
 
 function createMarkers() {
   for (var i = 0; i < locationData.length; i++) {

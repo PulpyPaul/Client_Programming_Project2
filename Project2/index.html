@@ -43,6 +43,7 @@
       <div class="container">
           <h1>Employment</h1>
           <div id="employment"></div>
+          <h2>Employment Table</h2>
           <div class="employmentTables">
             <table>
               <thead>
@@ -55,15 +56,51 @@
                 </tr>
               </thead>
               <tbody id="employTableData">
-
+              </tbody>
+            </table>
+          </div>
+          <h2>Co-op Table</h2>
+          <div class="employmentTables" id="coopTable">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employer</th>
+                  <th>Degree</th>
+                  <th>City</th>
+                  <th>Term</th>
+                </tr>
+              </thead>
+              <tbody id="coopTableData">
               </tbody>
             </table>
           </div>
           <p>Map of where students work!</p>
           <div id="map"></div>
       </div>
-    </div>    
+    </div>
+    <div id="peopleContent" class="contentBlock">
+      <div class="container" id="peopleContainer">
+        <div id="modalPopup"></div>
+      </div>
+    </div>
+    <div id="researchContent" class="contentBlock">
+      <div class="container">
+          <h1>Research</h1>
+          <div id="researchTabs"></div>
+      </div>
+    </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWfXOOj2CJvFz1BWO3MZ2FcTS-L6YgKRM&callback=initMap"
     async defer></script>
     </body>
+    <footer>
+      <div id="footer" class="contentBlock">
+        <div class="container">
+            <div id="links"></div>
+            <div id="copyright"></div>
+            <div id="socialMedia">
+              <h3>Social Media</h3>
+            </div>
+        </div>
+      </div>
+    </footer>
 </html>
