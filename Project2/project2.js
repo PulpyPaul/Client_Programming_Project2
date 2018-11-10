@@ -31,7 +31,11 @@ $(document).ready(function(){
   myXhr('get', {path:'/degrees'}, '#about').done(function(json){
     degreeData = json;
     for (var i = 0; i < degreeData.undergraduate.length; i++) {
-      $('#UNDdegrees').append('<div class="degree"><h3>' +degreeData.undergraduate[i].title+ '</h3><p>' +degreeData.undergraduate[i].description+ '</p></div>');
+      if (i == 2) {
+        $('#UNDdegrees').append('<div class="degree" float:right><h3>' +degreeData.undergraduate[i].title+ '</h3><p>' +degreeData.undergraduate[i].description+ '</p></div>');
+      } else {
+        $('#UNDdegrees').append('<div class="degree"><h3>' +degreeData.undergraduate[i].title+ '</h3><p>' +degreeData.undergraduate[i].description+ '</p></div>');
+      }
     }
 
     for (var i = 0; i < degreeData.graduate.length - 1; i++) {
@@ -210,10 +214,6 @@ $(document).ready(function(){
     $('#socialMedia').append('<p><a href="'+footerData.social.facebook+'">Facebook</a></p>');
     $('#socialMedia').append('<p><a href="'+footerData.social.twitter+'">Twitter</a></p>');
   });
-
-  myXhr('get', {path:'/news'}, null).done(function(json){
-    console.dir(json);
-  });
 });
 
 function openPersonModal(personDataIndex) {
@@ -250,18 +250,7 @@ function myXhr(t, d, id){
     	data:d,
     	cache:false,
     	async:true,
-    	beforeSend:function(){
-	    	//PLEASE - get your own spinner that 'fits' your site.
-	    	$(id).append('<img src="gears.gif" class="spin"/>');
-	    }
-  	}).always(function(){
-    	//kill spinner
-  		$(id).find('.spin').fadeOut(5000,function(){
-  			$(this).remove();
-  		});
-  	}).fail(function(){
-  		//handle failure
-  	});
+    });
 }
 
 window.onload = init;

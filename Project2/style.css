@@ -7,10 +7,15 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: Helvetica;
 }
 
 body {
-    background-image: url(img/background4.png);
+    background-image: url(img/bg.jpg);
+}
+
+p {
+    font-size: 20px;
 }
 
 #iste_Logo {
@@ -45,7 +50,7 @@ body {
 }
 
 .contentBlock {
-    border: 5px solid rgb(232, 104, 6);
+    border: 5px solid rgb(5, 111, 155);
     border-left: 0px;
     border-right: 0px;
 }
@@ -54,6 +59,11 @@ body {
     border: none;
     color: white;
     padding-bottom: 30px;
+    display: block;
+}
+
+#undDegreeContent h1{
+    color: white;
 }
 
 h1 {
@@ -61,18 +71,26 @@ h1 {
     font-size: 60px;
     padding: 0%;
     margin-bottom: 20px;
+    color: black;
 }
 
 .degree {
     display: inline-block;
     margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 30%;
-    height: 300px;
+    text-align: left;
+}
+
+.degree h3 {
+    text-align: center;
 }
 
 #grdDegreeContent {
     background-color: white;
     padding-bottom: 20px;
+    display: block;
 }
 
 #minorContent {
@@ -87,6 +105,15 @@ h1 {
 
 #employmentContent {
     background-color: white;
+    padding-bottom: 20px;
+}
+
+#employmentContent h1 {
+    padding-bottom: 15px;
+}
+
+#employmentContent h2 {
+    text-align: center;
 }
 
 .employmentTables {
@@ -100,6 +127,10 @@ h1 {
     text-align: center;
 }
 
+#peopleContent h1 {
+    color: white;
+}
+
 .personBox {
     background-color: grey;
     display: inline-block;
@@ -110,6 +141,7 @@ h1 {
 
 #researchContent {
     background-color: white;
+    padding-bottom: 30px;
 }
 
 #resourcesContent {
@@ -119,19 +151,39 @@ h1 {
 
 #footer {
     color: white;
-    border-top: none;   
+    border-top: none;
+    text-align: center;
+    border-bottom: none;
 }
 
 #footer a {
     color: white;
+    
 }
 
 #links, #copyright, #socialMedia {
     display: inline-block;
     margin-left: 20px;
     margin-right: 20px;
+    font-size: 25px;
+}
+
+#links {
+    float: left;
+}
+
+#socialMedia {
+    float: right;
 }
 
 #copyright {
+    margin: auto;
+}
+
+#copyright {
+    text-align: center;
+}
+
+#UNDdegrees {
     text-align: center;
 }
