@@ -7,9 +7,60 @@ var peopleData;
 var researchData;
 var footerData;
 var newsData;
+var ctx;
+var chart;
 var map;
+var studentDegrees;
+var chartData;
+var chart;
 
 function init() {
+
+  $('#doughBtn').button({
+    click: createDoughnutChart
+  });
+
+  $('#pieBtn').button({
+    click: createPieChart
+  });
+
+  ctx = document.getElementById("chart").getContext('2d');
+
+  chartData = {
+    labels: ["WMC-BS", "CMIT-BS", "INFOTEC-BS", "ANSA-BS", "NETSYS-BS", "MEDINFO-BS", "HCIN-MS", "NETSYS-MS", "INFOTEC-MS", "MEDINFO-MS"],
+    datasets: [{
+        label: "Student Degrees",
+        backgroundColor: [
+          "blue",
+          "red",
+          "green",
+          "purple",
+          "black",
+          "orange",
+          "gold",
+          "white",
+          "pink"
+        ],
+        data: [
+          studentDegrees.WMC_BS, 
+          studentDegrees.CMIT_BS, 
+          studentDegrees.INFOTEC_BS, 
+          studentDegrees.ANSA_BS, 
+          studentDegrees.NETSYS_BS, 
+          studentDegrees.MEDINFO_BS,
+          studentDegrees.HCIN_MS,
+          studentDegrees.NETSYS_MS,
+          studentDegrees.INFOTEC_MS,
+          studentDegrees.MEDINFO_MS],
+    }]
+  };
+
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {}
+});
+
   initMap();
   createMarkers();
 }
@@ -20,6 +71,98 @@ function initMap() {
   document.getElementById('map'), {zoom: 5, center: locOfCity});
 
   var marker = new google.maps.Marker({position: locOfCity, map: map})
+}
+
+function formatChartData(dataArray) {
+
+  studentDegrees = {
+    'WMC_BS': 0,
+    'CMIT_BS': 0,
+    'INFOTEC_BS': 0,
+    'ANSA_BS': 0,
+    'NETSYS_BS': 0,
+    'MEDINFO_BS': 0,
+    'HCIN_MS': 0,
+    'NETSYS_MS': 0,
+    'INFOTEC_MS': 0,
+    'MEDINFO_MS': 0,
+    'other': 0
+  };
+
+
+  for (var i = 0; i < dataArray.length; i++) {
+    switch(dataArray[i].degree) {
+      case 'WMC-BS':
+        studentDegrees.WMC_BS++;
+        break;
+      case 'CMIT-BS':
+        studentDegrees.CMIT_BS++;
+        break;
+      case 'INFOTEC-BS':
+        studentDegrees.INFOTEC_BS++;
+        break;
+      case 'ANSA-BS':
+        studentDegrees.ANSA_BS++;
+        break;
+      case 'MEDINFO-BS':
+        studentDegrees.MEDINFO_BS++;
+        break;
+      case 'NETSYS-BS':
+        studentDegrees.NETSYS_BS++;
+        break;
+      case 'HCIN-MS':
+        studentDegrees.HCIN_MS++;
+        break;
+      case 'NETSYS-MS':
+        studentDegrees.NETSYS_MS++;
+        break;
+      case 'INFOTEC-MS':
+        studentDegrees.INFOTEC_MS++;
+        break;
+      case 'MEDINFO-MS':
+        studentDegrees.MEDINFO_MS++;
+        break;
+      default:
+        studentDegrees.other++;
+        break;
+    }
+  }
+}
+
+function createPieChart() {
+  chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'pie',
+    data: chartData,
+    options: {}
+  });
+}
+
+function createDoughnutChart() {
+  chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: chartData,
+    options: {}
+  });
+}
+
+function createRadarChart() {
+  chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'radar',
+    data: chartData,
+    options: {}
+  });
+}
+
+function createBarChart() {
+  chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {}
+  });
 }
 
 $(document).ready(function(){
@@ -89,40 +232,50 @@ $(document).ready(function(){
     htmlContent = "<p>" +employmentData.introduction.content[1].description+ "</p>";
     $('#employment').append(htmlContent);
 
-    htmlContent = "<h2>" +employmentData.careers.title+ "</h2>";
-    $('#employment').append(htmlContent);
+    htmlContent = '<div id="careers">';
 
-    htmlContent = "";
+    htmlContent += "<h2>" +employmentData.careers.title+ "</h2>";
 
+    htmlContent += "<ul>";
+   
     for (var i = 0; i < employmentData.careers.careerNames.length; i++) {
-      htmlContent += "<p>" +employmentData.careers.careerNames[i]+ "</p>";
+      htmlContent += "<li>" +employmentData.careers.careerNames[i]+ "</li>";
     }
 
+    htmlContent += '</ul></div>';
+
     $('#employment').append(htmlContent);
 
-    htmlContent = "<h2>" +employmentData.employers.title+ "</h2>";
-    $('#employment').append(htmlContent);
+    htmlContent = '<div id="employers">';
 
-    htmlContent = "";
+    htmlContent += "<h2>" +employmentData.employers.title+ "</h2>";
 
+    htmlContent += "<ul>"
+    
     for (var i = 0; i < employmentData.employers.employerNames.length; i++) {
-      htmlContent += "<p>" +employmentData.employers.employerNames[i]+ "</p>";
+      htmlContent += "<li>" +employmentData.employers.employerNames[i]+ "</li>";
     }
+
+    htmlContent += '</ul></div>';
 
     $('#employment').append(htmlContent);
     
     htmlContent = "<h2>" +employmentData.degreeStatistics.title+ "<h2>";
     $('#employment').append(htmlContent);
 
-    htmlContent = "";
+    htmlContent = "<ul>";
 
     for (var i = 0; i < employmentData.degreeStatistics.statistics.length; i++) {
-      htmlContent += "<p>" +employmentData.degreeStatistics.statistics[i].value+ " - " +employmentData.degreeStatistics.statistics[i].description+ "</p>";
+      htmlContent += "<li>" +employmentData.degreeStatistics.statistics[i].value+ " - " +employmentData.degreeStatistics.statistics[i].description+ "</li>";
     }
+
+    htmlContent += "</ul>";
 
     $('#employment').append(htmlContent);
 
     var currTable = employmentData.employmentTable.professionalEmploymentInformation;
+
+    formatChartData(employmentData.employmentTable.professionalEmploymentInformation);
     
     htmlContent = "";
     for (var i = 0; i < currTable.length; i++) {
@@ -197,7 +350,7 @@ $(document).ready(function(){
       
 
       $('#researchTabs').tabs({
-        active: 0,
+        active: 9,
         collapsible: true
       });
   });

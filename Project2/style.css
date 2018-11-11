@@ -14,7 +14,7 @@ body {
     background-image: url(img/bg.jpg);
 }
 
-p {
+p, li {
     font-size: 20px;
 }
 
@@ -53,6 +53,7 @@ p {
     border: 5px solid rgb(5, 111, 155);
     border-left: 0px;
     border-right: 0px;
+    display: block;
 }
 
 #undDegreeContent {
@@ -80,6 +81,7 @@ h1 {
     margin-left: 10px;
     margin-right: 10px;
     width: 30%;
+    height: 250px;
     text-align: left;
 }
 
@@ -90,7 +92,7 @@ h1 {
 #grdDegreeContent {
     background-color: white;
     padding-bottom: 20px;
-    display: block;
+    text-align: center;
 }
 
 #minorContent {
@@ -109,7 +111,7 @@ h1 {
 }
 
 #employmentContent h1 {
-    padding-bottom: 15px;
+    padding-bottom: 50px;
 }
 
 #employmentContent h2 {
@@ -131,12 +133,51 @@ h1 {
     color: white;
 }
 
+#employers, #careers {
+    width: 40%;
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#employment {
+    text-align: center;
+}
+
+#employment p, li {
+    text-align: left;
+}
+
+#employment p {
+    margin-bottom: 50px;
+}
+
+#employment h1 {
+    margin-bottom: 80px;
+}
+
+.employmentTables {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.employmentTableTitle {
+    margin-bottom: 40px;
+    margin-top: 80px;
+}
+
 .personBox {
-    background-color: grey;
+    background-color: rgb(5, 111, 155, 0.4);
     display: inline-block;
     height: 150px;
     width: 300px;
     margin: 20px;
+    border: 2px solid rgb(5, 111, 155);
+}
+
+.personBox:hover {
+    background-color: rgb(5, 111, 155);
 }
 
 #researchContent {
@@ -184,6 +225,16 @@ h1 {
     text-align: center;
 }
 
-#UNDdegrees {
+#UNDdegrees, #GRDdegrees {
     text-align: center;
+    margin: auto;
+    display: inline-block;
+    height: 250px;
+}
+
+#chartContainer {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    display: block;
 }
